@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
+import webbrowser
+
 
 
 url = "https://zamunda.net/takelogin.php"
@@ -30,8 +32,11 @@ p2 = s.get(url)
 
 soup = bs(s.get(searchGenerated).text, 'html.parser')
 
-with open("output2.html", "w", encoding='utf-8') as file:
+with open("output.html", "w", encoding='utf-8') as file:
     file.write(str(soup.prettify()))
 
 s.close()
 print ("FINISHED")
+
+webbrowser.open_new_tab('output.html')
+
