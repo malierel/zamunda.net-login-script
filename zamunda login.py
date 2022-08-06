@@ -16,17 +16,22 @@ payload = {
     "password": password
 }
 
+search = "YOUR SEARCH"
+
+searchGenerated = "https://zamunda.net/bananas?search=" + \
+    search.lower().replace(" ", "+")+"&page=0"
+
 s = requests.Session()
-token = s.get(url).cookies
 
 p = s.post(url, headers=HEADERS, data=payload)
 
 print("Code: {}".format(p.status_code))
+p2 = s.get(url)
 
-cookies = p.cookies
-soup = bs(s.get('https://zamunda.net/bananas').text, 'html.parser')
+soup = bs(s.get(searchGenerated).text, 'html.parser')
 
-with open("output.html", "w", encoding='utf-8') as file:
+with open("output2.html", "w", encoding='utf-8') as file:
     file.write(str(soup.prettify()))
 
-print("Finished")
+s.close()
+print ("FINISHED")
